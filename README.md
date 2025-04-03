@@ -28,7 +28,7 @@ git clone https://github.com/UR-CC/lp2-taller2.git
 ```bash
 cd lp2-taller2
 python -m venv venv
-venv/bin/activate
+venv/Scripts/activate
 ```
 
 3. Instalar librerías y dependencias
@@ -43,6 +43,6 @@ Maecenas sed lorem at arcu varius mollis. Sed eleifend nulla ut blandit interdum
 1. Ejecutar el proyecto
 ```bash
 cd lp2-taller2
-python app.py
+python main.py
 ```
 

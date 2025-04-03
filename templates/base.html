@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <title>{% block titulo %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
   </head>
   <body>
-    <img src="{{ url_for('static', filename='imagenes/tienda.png') }}" alt="Logo">
+    <img src="{{ url_for('static', filename='imagenes/titulo.png') }}" class="center" alt="Logo">
     {% block contenido %}
+    {% endblock %}
   </body>
 </html>

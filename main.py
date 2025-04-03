@@ -10,7 +10,6 @@ cursor.execute("""
 SELECT * FROM productos;
 """)
 productos = [dict(producto) for producto in cursor.fetchall()]
-pprint(productos)
 cursor.close()
 conexion.close()
 
@@ -24,8 +23,11 @@ def ruta_raiz():
 
 @app.route('/producto/<int:pid>')
 def ruta_producto(pid):
-  pass
-  
+  for producto in productos:
+    if pid == producto['id']:
+      return render_template('producto.html', producto=producto)
+  return redirect("/")
+
 # programa principal
 if __name__ == '__main__':
   app.run(host='0.0.0.0', debug=True)

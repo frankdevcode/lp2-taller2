@@ -2,16 +2,16 @@ from flask import Flask, render_template, redirect
 import sqlite3
 from pprint import pprint
 
-# cargamos todos los datos
-conexion = sqlite3.connect('web2.sqlite3')
-conexion.row_factory = sqlite3.Row 
-cursor = conexion.cursor()
-cursor.execute("""
-SELECT * FROM productos;
-""")
-productos = [dict(producto) for producto in cursor.fetchall()]
-cursor.close()
-conexion.close()
+# función para obtener productos de la base de datos
+def get_productos():
+    conexion = sqlite3.connect('web2.sqlite3')
+    conexion.row_factory = sqlite3.Row 
+    cursor = conexion.cursor()
+    cursor.execute("SELECT * FROM productos;")
+    productos = [dict(producto) for producto in cursor.fetchall()]
+    cursor.close()
+    conexion.close()
+    return productos
 
 # aplicación
 app = Flask(__name__)
@@ -19,10 +19,12 @@ app = Flask(__name__)
 # rutas
 @app.route('/')
 def ruta_raiz():
+  productos = get_productos()
   return render_template('index.html', productos=productos)
 
 @app.route('/producto/<int:pid>')
 def ruta_producto(pid):
+  productos = get_productos()
   for producto in productos:
     if pid == producto['id']:
       return render_template('producto.html', producto=producto)
